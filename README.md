@@ -100,6 +100,8 @@ b) Développer un script en Python/Scapy capable de générer et envoyer des tra
 * 5 - Disassociated because AP is unable to handle all currently associated stations
 * 8 - Deauthenticated because sending STA is leaving BSS
 
+https://www.thepythoncode.com/article/force-a-device-to-disconnect-scapy
+
 __Question__ : quels codes/raisons justifient l'envoie de la trame à la STA cible et pourquoi ?
 
 __Question__ : quels codes/raisons justifient l'envoie de la trame à l'AP et pourquoi ?
