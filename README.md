@@ -104,13 +104,23 @@ https://www.thepythoncode.com/article/force-a-device-to-disconnect-scapy
 
 __Question__ : quels codes/raisons justifient l'envoie de la trame à la STA cible et pourquoi ?
 
+> Dans ce cas, c'est l'AP qui déconnecte la STA cible. Les codes qui satisfont ce cas peuvent être le 1, le 4 et le 5
+
 __Question__ : quels codes/raisons justifient l'envoie de la trame à l'AP et pourquoi ?
+
+> Dans ce cas, c'est la STA qui se déconnecte de l'AP. Le code typique qui satisfait ce cas est le 8 car c'est la STA qui quitte le BSS et elle envoie une deauth à l'AP qu'elle quitte.
 
 __Question__ : Comment essayer de déauthentifier toutes les STA ?
 
+> On peut remplacer l'addr1 par l'adresse broadcast ff:ff:ff:ff:ff:ff. Ainsi, l'AP va demander de déauthentifier toutes les STA
+
 __Question__ : Quelle est la différence entre le code 3 et le code 8 de la liste ?
 
+> Dans le code 3, c'est l'AP qui se déconnecte alors que dans le code 8 c'est la STA qui se déconnecte par exemple si elle quitte le champ de rayonnement de l'AP.
+
 __Question__ : Expliquer l'effet de cette attaque sur la cible
+
+> Elle se verra se faire déconnecter du réseau, comme si l'on se déconnectait manuellement du réseau depuis la STA
 
 ### 2. Fake channel evil tween attack
 a)	Développer un script en Python/Scapy avec les fonctionnalités suivantes :
