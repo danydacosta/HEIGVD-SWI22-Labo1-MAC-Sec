@@ -61,6 +61,7 @@ if __name__ == "__main__":
 
     chosen_network = networks.loc[networks['SSID'] == chosen_ssid]
     # generate a beacon with chosen SSID
+    # TODO : send beacon to specific target?
     dot11 = Dot11(type=0, subtype=8, addr1='ff:ff:ff:ff:ff:ff', addr2='22:22:22:22:22:22', addr3='33:33:33:33:33:33')
     essid = Dot11Elt(ID='SSID',info=chosen_ssid, len=len(chosen_ssid))
 
