@@ -171,7 +171,11 @@ Pour la détection du SSID, vous devez utiliser Scapy. Pour proposer un evil twi
 
 __Question__ : comment ça se fait que ces trames puissent être lues par tout le monde ? Ne serait-il pas plus judicieux de les chiffrer ?
 
+> 
+
 __Question__ : pourquoi les dispositifs iOS et Android récents ne peuvent-ils plus être tracés avec cette méthode ?
+
+> Les appareils récents utilisent la randomisation des adresses MAC. Ainsi, lorsque l'appareil scan les alentours en envoyant des probes, l'adresse ne sera pas la même que lors du précédent scanning.
 
 
 ### 5. Détection de clients et réseaux
