@@ -111,7 +111,11 @@ b) Développer un script en Python/Scapy capable de générer et envoyer des tra
 Output :
 ![](images/1.png)  
 
-On constate sur la gauche l'output du script et sur la droite les trames deauth qui sont envoyées en conséquence. 
+On constate sur la gauche l'output du script et sur la droite les trames deauth qui sont envoyées en conséquence.
+
+Si l'on se concentre sur une trame on peut constater le reason code 1 qui a été utilisé lors de l'exécution du script :
+
+![](images/1_1.png)
 
 __Question__ : quels codes/raisons justifient l'envoie de la trame à la STA cible et pourquoi ?
 
@@ -131,7 +135,7 @@ __Question__ : Quelle est la différence entre le code 3 et le code 8 de la list
 
 __Question__ : Expliquer l'effet de cette attaque sur la cible
 
-> Elle se verra se faire déconnecter du réseau, comme si l'on se déconnectait manuellement du réseau depuis la STA
+> Elle se verra se faire déconnecter du réseau, comme si l'on se déconnectait manuellement du réseau depuis la STA. Dans notre script, nous envoyons 100 paquets deauth avec un intervalle de 0,1s ce qui aura pour effet de déconnecter la cible pendant environ 10s
 
 ### 2. Fake channel evil tween attack
 a)	Développer un script en Python/Scapy avec les fonctionnalités suivantes :
@@ -147,7 +151,7 @@ Output du script :
 
 __Question__ : Expliquer l'effet de cette attaque sur la cible
 
-> Si l'on choisi le réseau de la HEIG-VD par exemple, cela n'aura pas d'effet sur la cible car l'on annonce un réseau ouvert avec nos beacons et la cible va prioriser les Wi-Fi suivant leur niveau de sécurité.
+> Si l'on choisi le réseau de la HEIG-VD par exemple, cela n'aura pas d'effet sur la cible car l'on annonce un réseau ouvert avec nos beacons et la cible va prioriser les Wi-Fi suivant leur niveau de sécurité. Dans un cas pratique, on voudra que la cible soit piégée et se connecte sur notre réseau pour faire un MITM
 
 ### 3. SSID flood attack
 
@@ -156,6 +160,15 @@ Développer un script en Python/Scapy capable d'inonder la salle avec des SSID d
 **Ce script demande un paramètre qui peut être "1" ou "2". Avec le paramètre 1, il va attendre un fichier texte avec le nom des SSID. Un SSID par ligne.
 Avec le chiffre 2, des SSID aléatoires vont être générés.**  
 	
+Dans notre exemple, nous avons fourni au script un fichier texte avec les SSID suivants :
+```
+stefan
+hackme
+heig
+helloHacker
+```
+
+
 Via une capture Wireshark, on peut voir les beacons passer:  
 ![](images/3.JPG)  
 	
@@ -192,9 +205,17 @@ Développer un script en Python/Scapy capable de detecter une STA cherchant un S
 
 Pour la détection du SSID, vous devez utiliser Scapy. Pour proposer un evil twin, vous pouvez très probablement réutiliser du code des exercices précédents ou vous servir d'un outil existant.
 
+**Il faut configurer dans le script la valeur de la constante `SSID` avec le nom du SSID à cibler ainsi que la variable `interface`**
+
+Output du script :
+
+![](images/4.png)
+
+On voit sur la gauche l'output du script avec la détection du probe request et sur la droite les beacons générés par le script avec le SSID McDonalds.
+
 __Question__ : comment ça se fait que ces trames puissent être lues par tout le monde ? Ne serait-il pas plus judicieux de les chiffrer ?
 
-> 
+> Cela ajouterait de la complexité dans le traitement des probe requests car des clés devraient être négociées pour chiffrer les probe request, et cela avant même que la STA et l'AP soit authentifiée.
 
 __Question__ : pourquoi les dispositifs iOS et Android récents ne peuvent-ils plus être tracés avec cette méthode ?
 
@@ -221,14 +242,6 @@ B8:17:C2:EB:8F:8F &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 08:EC:F5:28:1A:EF
 9C:F3:87:34:3C:CB &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 00:6B:F1:50:48:3A
 
 00:0E:35:C8:B8:66 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 08:EC:F5:28:1A:EF
-
-
-### 6. Hidden SSID reveal (exercices challenge optionnel - donne droit à un bonus)
-
-Développer un script en Python/Scapy capable de reveler le SSID correspondant à un réseau configuré comme étant "invisible".
-
-__Question__ : expliquer en quelques mots la solution que vous avez trouvée pour ce problème ?
-
 
 
 ## Livrables

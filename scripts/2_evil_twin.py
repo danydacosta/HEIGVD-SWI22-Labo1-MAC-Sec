@@ -12,6 +12,7 @@ networks = pandas.DataFrame(columns=["BSSID", "SSID", "Channel", "dBm_Signal"])
 networks.set_index("BSSID", inplace=True)
 
 def callback(packet):
+    '''Process the Beacon packet in parameter to extract various informations'''
     if packet.haslayer(Dot11Beacon):
         # extract the MAC address of the network
         bssid = packet[Dot11].addr2
@@ -30,6 +31,7 @@ def callback(packet):
 change_channel_running = True
 
 def change_channel():
+    '''Change de Wi-Fi card listenning channel from 1 to 14 each 0.5s'''
     ch = 1
     while change_channel_running:
         os.system(f"iwconfig {interface} channel {ch}")
@@ -62,7 +64,6 @@ if __name__ == "__main__":
 
     chosen_network = networks.loc[networks['SSID'] == chosen_ssid]
     # generate a beacon with chosen SSID
-    # TODO : send beacon to specific target?
     dot11 = Dot11(type=0, subtype=8, addr1='ff:ff:ff:ff:ff:ff', addr2='22:22:22:22:22:22', addr3='33:33:33:33:33:33')
     essid = Dot11Elt(ID='SSID',info=chosen_ssid, len=len(chosen_ssid))
 
@@ -72,4 +73,4 @@ if __name__ == "__main__":
     print("switching to channel " + str(channel_to_send))
     os.system(f"iwconfig {interface} channel {channel_to_send}")
     # send the beacon frame 100 times with inter time 0.1s
-    sendp(frame, inter=0.1, count=1000, iface=interface, verbose=1)
+    sendp(frame, inter=0.1, count=100, iface=interface, verbose=1)
