@@ -137,7 +137,16 @@ __Question__ : Expliquer l'effet de cette attaque sur la cible
 
 ### 3. SSID flood attack
 
-Développer un script en Python/Scapy capable d'inonder la salle avec des SSID dont le nom correspond à une liste contenue dans un fichier text fournit par un utilisateur. Si l'utilisateur ne possède pas une liste, il peut spécifier le nombre d'AP à générer. Dans ce cas, les SSID seront générés de manière aléatoire.
+Développer un script en Python/Scapy capable d'inonder la salle avec des SSID dont le nom correspond à une liste contenue dans un fichier text fournit par un utilisateur. Si l'utilisateur ne possède pas une liste, il peut spécifier le nombre d'AP à générer. Dans ce cas, les SSID seront générés de manière aléatoire.  
+	
+**Ce script demande un paramètre qui peut être "1" ou "2". Avec le paramètre 1, il va attendre un fichier texte avec le nom des SSID. Un SSID par ligne.
+Avec le chiffre 2, des SSID aléatoires vont être générés.**  
+	
+Via une capture Wireshark, on peut voir les beacons passer:  
+![](images/3.JPG)  
+	
+En cherchant des réseaux WiFi disponibles sur notre PC Windows, on peut voir les réseaux dont on forge les beacons:  
+![](images/3bis.JPG) 
 
 
 ## Partie 2 - probes
@@ -180,9 +189,16 @@ __Question__ : pourquoi les dispositifs iOS et Android récents ne peuvent-ils p
 
 ### 5. Détection de clients et réseaux
 
-a) Développer un script en Python/Scapy capable de lister toutes les STA qui cherchent activement un SSID donné
+a) Développer un script en Python/Scapy capable de lister toutes les STA qui cherchent activement un SSID donné  
+**Ce script attend un paramètre, le nom du SSID dont on veut détecter les probe request.**  
+	
+Dès qu'un nouveau probe request d'une nouvelle STA est détecté, une nouvelle ligne apparaît. On voit les MAC adresses des clients entre guillemets sur chaque ligne.  
+![](images/5a.JPG)
 
-b) Développer un script en Python/Scapy capable de générer une liste d'AP visibles dans la salle et de STA détectés et déterminer quelle STA est associée à quel AP. Par exemple :
+b) Développer un script en Python/Scapy capable de générer une liste d'AP visibles dans la salle et de STA détectés et déterminer quelle STA est associée à quel AP. Par exemple :  
+
+Sur chaque ligne, on voit le BSSID. Ensuite, après "Clients" il y a la MAC adresse des clients qui sont connectés à ce BSSID.  
+![](images/5b.JPG)  
 
 STAs &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; APs
 
