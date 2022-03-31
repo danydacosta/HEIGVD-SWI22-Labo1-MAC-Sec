@@ -95,6 +95,10 @@ __Question__ : quel code est utilisé par aircrack pour déauthentifier un clien
 
 __Question__ : A l'aide d'un filtre d'affichage, essayer de trouver d'autres trames de déauthentification dans votre capture. Avez-vous en trouvé d'autres ? Si oui, quel code contient-elle et quelle est son interpretation ?
 
+> D'après nos essais, on a essayé de se déconnecter intentionnellement du wifi et de capturer pour voir le reason code mais on obtenait seulement un Disassociate :
+
+![](images/disassociate.png)  
+
 b) Développer un script en Python/Scapy capable de générer et envoyer des trames de déauthentification. Le script donne le choix entre des Reason codes différents (liste ci-après) et doit pouvoir déduire si le message doit être envoyé à la STA ou à l'AP :
 
 * 1 - Unspecified
@@ -102,7 +106,12 @@ b) Développer un script en Python/Scapy capable de générer et envoyer des tra
 * 5 - Disassociated because AP is unable to handle all currently associated stations
 * 8 - Deauthenticated because sending STA is leaving BSS
 
-https://www.thepythoncode.com/article/force-a-device-to-disconnect-scapy
+**Il faut modifier dans le script la MAC addresse de la STA à cibler, de l'AP et le nom de l'interface pour que le script fonctionne**
+
+Output :
+![](images/1.png)  
+
+On constate sur la gauche l'output du script et sur la droite les trames deauth qui sont envoyées en conséquence. 
 
 __Question__ : quels codes/raisons justifient l'envoie de la trame à la STA cible et pourquoi ?
 
@@ -132,8 +141,13 @@ a)	Développer un script en Python/Scapy avec les fonctionnalités suivantes :
 * Permettre à l'utilisateur de choisir le réseau à attaquer
 * Générer un beacon concurrent annonçant un réseau sur un canal différent se trouvant à 6 canaux de séparation du réseau original
 
+Output du script :
+![](images/2.png)  
+
+
 __Question__ : Expliquer l'effet de cette attaque sur la cible
 
+> Si l'on choisi le réseau de la HEIG-VD par exemple, cela n'aura pas d'effet sur la cible car l'on annonce un réseau ouvert avec nos beacons et la cible va prioriser les Wi-Fi suivant leur niveau de sécurité.
 
 ### 3. SSID flood attack
 

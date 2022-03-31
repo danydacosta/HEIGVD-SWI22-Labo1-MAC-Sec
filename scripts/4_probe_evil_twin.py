@@ -4,7 +4,7 @@ from scapy.all import *
 # SSID to target
 SSID='bite'
 # interface name, check using iwconfig
-interface = "en0"
+interface = "wlan0"
 
 def callback(packet):
     if packet.haslayer(Dot11ProbeReq):

